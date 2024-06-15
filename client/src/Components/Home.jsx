@@ -2,16 +2,19 @@ import "react-multi-carousel/lib/styles.css";
 
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { fetchDataFromApi, postDataToApi } from "../API/api";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import Carousel from "react-multi-carousel";
 import Productcard from "./Productcard";
 import React from "react";
+import Search from "./Search";
+import { useStateContext } from "../ContextProvider/ContextProvider";
 
 const Home = () => {
   // const [isMoving, setIsMoving] = useState(false);
   const [featuredItems, setFeaturedItems] = useState([]);
   const [workshop, setworkshop] = useState([]);
+  const { ShowSearch, set_ShowSearch } = useStateContext();
   // const handleviewmore = () => {
   //   setvisible((prev) => prev + 4);
   // };
@@ -64,6 +67,7 @@ const Home = () => {
   console.log(featuredItems);
   return (
     <div className="mt-2">
+
       <div className="grid grid-cols-2 gap-8 py-[48px]">
         <div className=" border border-[#5C6B94] rounded p-[12px]  ">
           <img

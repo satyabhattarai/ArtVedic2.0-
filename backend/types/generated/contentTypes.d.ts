@@ -817,6 +817,7 @@ export interface ApiAllAll extends Schema.CollectionType {
     img: Attribute.Media<'images'>;
     description: Attribute.String;
     title: Attribute.String;
+    location: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -909,6 +910,7 @@ export interface ApiCartCart extends Schema.CollectionType {
   };
   attributes: {
     cart: Attribute.Integer;
+    user: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

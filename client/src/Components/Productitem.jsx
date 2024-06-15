@@ -43,12 +43,18 @@ const Productitem = () => {
         "USER_EMAIL"
       )}`
     );
-
-    set_user_photo(res.data[0].attributes.img.data.attributes.url);
+    if (res && res.data.length > 0) {
+      set_user_photo(res.data[0].attributes.img.data.attributes.url);
+    }
   }
   const handleAddToCart = async (id) => {
+    if (!localStorage.getItem("USER_EMAIL")) {
+      alert("login first");
+      return 0;
+    }
     const formData = {
       cart: id,
+      user: localStorage.getItem("USER_EMAIL"),
     };
 
     let { data } = await postDataToApi("/api/carts", formData, false);
@@ -58,7 +64,10 @@ const Productitem = () => {
   };
   const handle_bid_data = async (e) => {
     e.preventDefault();
-    console.log(item[0].attributes.img.data.id);
+    if (!localStorage.getItem("USER_EMAIL")) {
+      alert("login first");
+      return 0;
+    }
 
     const formData = {
       email: item[0].attributes.email,
@@ -125,7 +134,8 @@ const Productitem = () => {
                   type="text"
                   name="description"
                 >
-                  {/* {item.attributes.description} */}
+                  <h1 className="mb-5 text-3xl">Description:</h1>{" "}
+                  {item[0].attributes.description}
                 </div>
               </div>
 
@@ -138,6 +148,11 @@ const Productitem = () => {
                 </div>
                 <div className="flex items-center justify-between mb-[24px]">
                   <span className="">Email: {item[0].attributes.email}</span>
+                </div>
+                <div className="block width-[100%] mb-[24px]">
+                  <span className="">
+                    Published At: {item[0].attributes.publishedAt}
+                  </span>
                 </div>
 
                 <form onSubmit={handle_bid_data}>
@@ -161,12 +176,19 @@ const Productitem = () => {
                     >
                       BID NOW
                     </button>
-
-                    <button className="border border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent">
-                      BUY NOW
-                    </button>
                   </div>
                 </form>
+                <button
+                  onClick={() => {
+                    if (!localStorage.getItem("USER_EMAIL")) {
+                      alert("login first");
+                    } else {
+                    }
+                  }}
+                  className="border block border-[#5C6B94] px-[16px] py-[4px] bg-gradient-to-r from-[#0F131B] to-transparent"
+                >
+                  BUY NOW
+                </button>
 
                 <button
                   onClick={() => {

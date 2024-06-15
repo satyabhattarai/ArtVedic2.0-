@@ -3,6 +3,7 @@ import { fetchDataFromApi, postDataToApi, removeDataFromApi } from "../API/api";
 
 const BidRequests = () => {
   const [bids, set_bids] = useState();
+  const [bids_accept, set_bids_accept] = useState();
   useEffect(() => {
     GetBidRequest();
   }, []);
@@ -41,17 +42,20 @@ const BidRequests = () => {
     );
     set_bids(res.data);
   }
+
   return (
     <div>
-      {bids && bids.length > 0 && (
-        <div className="mt-12">
-          <h1 className="mb-8 text-2xl text-white">Bid Requests</h1>
-          {bids.map((item) => (
+      <div className="mt-12">
+        <h1 className="mb-8 text-2xl text-white">Bid Requests</h1>
+        {!bids && <h1>No requests</h1>}
+        {bids &&
+          bids.map((item) => (
             <div key={item.id} className="my-10">
               <table className="min-w-full text-left text-black bg-white rounded table-auto">
                 <thead className="font-medium border-b">
                   <tr>
                     <th className="px-6 py-4">Title:</th>
+                    <th className="px-6 py-4">Marked Price:</th>
                     <th className="px-6 py-4">Bid Price:</th>
                     <th className="px-6 py-4">Bid By</th>
                     <th className="px-6 py-4">Actions</th>
@@ -62,6 +66,7 @@ const BidRequests = () => {
 
                   <tr>
                     <td className="px-6 py-4"> {item.attributes.title}</td>
+                    <td className="px-6 py-4"> {item.attributes.price}</td>
                     <td className="px-6 py-4"> {item.attributes.bid_amount}</td>
                     <td className="px-6 py-4">
                       Email: {item.attributes.bid_by_email}
@@ -71,9 +76,15 @@ const BidRequests = () => {
                       <>
                         <button
                           onClick={() => {
-                            accept_bid(item);
+                            if (!item.attributes.status) {
+                              accept_bid(item);
+                            }
                           }}
-                          className="px-8 py-2 bg-green-400 rounded"
+                          className={`${
+                            item.attributes.status
+                              ? "px-8 py-2 bg-green-100 cursor-default rounded"
+                              : "px-8 py-2 bg-green-500 rounded"
+                          }`}
                         >
                           Accept
                         </button>
@@ -92,8 +103,7 @@ const BidRequests = () => {
               </table>
             </div>
           ))}
-        </div>
-      )}
+      </div>
     </div>
   );
 };

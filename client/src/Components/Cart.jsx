@@ -20,7 +20,11 @@ const Cart = () => {
 
   async function getcartid() {
     try {
-      let result = await fetchDataFromApi(`/api/carts?populate=*`);
+      let result = await fetchDataFromApi(
+        `/api/carts?populate=*&filters[user]=${localStorage.getItem(
+          "USER_EMAIL"
+        )}`
+      );
       set_cart_id(result.data);
     } catch (error) {
       console.error("Error fetching cart ID:", error);

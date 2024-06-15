@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useStateContext } from "../ContextProvider/ContextProvider";
 
 const Header = () => {
-  const [ShowSearch, setShowSearch] = useState(false);
+  const { ShowSearch, set_ShowSearch } = useStateContext();
   const [user, set_user] = useState();
   const navigate = useNavigate();
 
@@ -40,9 +40,9 @@ const Header = () => {
           </a>
         </li>
         <li>
-          <CiSearch onClick={() => setShowSearch(true)} />
+          <CiSearch onClick={() => set_ShowSearch(true)} />
         </li>
-        {ShowSearch && <Search setShowSearch={setShowSearch} />}
+        {ShowSearch && <Search />}
       </ul>
       <div>
         <div className="flex items-center justify-between">
@@ -59,9 +59,17 @@ const Header = () => {
                 {user}
               </button>
             )}
-            <a href="/chooseform">
+            <div
+              onClick={() => {
+                if (localStorage.getItem("USER_EMAIL")) {
+                  navigate("/chooseform");
+                } else {
+                  alert("login first");
+                }
+              }}
+            >
               <CgProfile className="text-3xl" />
-            </a>
+            </div>
           </div>
           {user && (
             <button

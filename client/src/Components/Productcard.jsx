@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 
 import { postDataToApi } from "../API/api";
+import { useNavigate } from "react-router-dom";
 
 const Productcard = ({ artwork }) => {
   const [featuredItems, setFeaturedItems] = useState([]);
-
+  const navigate = useNavigate();
   return (
     <div>
       {artwork && (
-        <div className="border rounded-lg shadow dark:border-slate-900 dark:bg-slate-800">
+        <div
+          onClick={() => {
+            navigate(`/art/${artwork.id}`);
+          }}
+          className="border rounded-lg shadow dark:border-slate-900 dark:bg-slate-800"
+        >
           <img
             key={`allartwork-${artwork.id}`}
             className="w-full h-auto"
