@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "alls",
+  "info": {
+    "singularName": "all",
+    "pluralName": "alls",
+    "displayName": "All",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "string"
+    },
+    "price": {
+      "type": "float"
+    },
+    "artist": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Acrylics",
+        "Watercolor",
+        "Oil Painting",
+        "Portrait",
+        "Abstract",
+        "Glass Art",
+        "Pixel Art"
+      ]
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

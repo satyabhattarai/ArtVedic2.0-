@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bids",
+  "info": {
+    "singularName": "bid",
+    "pluralName": "bids",
+    "displayName": "bid",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "string"
+    },
+    "artist": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "img": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Acrylics",
+        "Watercolor",
+        "Oil Painting",
+        "Portrait",
+        "Abstract",
+        "Glass Art",
+        "Pixel Art"
+      ]
+    },
+    "bid_by_name": {
+      "type": "string"
+    },
+    "bid_amount": {
+      "type": "string"
+    },
+    "status": {
+      "type": "boolean"
+    },
+    "bid_by_email": {
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    }
+  }
+}
